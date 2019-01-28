@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run solymantaherian/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-031580933778"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $Aws_Access_Key
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
